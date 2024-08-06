@@ -27,9 +27,18 @@ public class BookController {
 
     @GetMapping(value="{id}")
     public Book getBookById(@PathVariable("id") String id) {
-        Book book = bookService.findById(new ObjectId(id));
+        Book book = bookService.findById(id);
         return book;
     }
+
+
+    @GetMapping(value="/similar/{id}")
+    public List<Book> getSimilarBooks(@PathVariable("id") String referenceBookId) {
+        List<Book> books = bookService.getSimilarBooks(referenceBookId);
+        return books;
+    }
+
+
 
 
 

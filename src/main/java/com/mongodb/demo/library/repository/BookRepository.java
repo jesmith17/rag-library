@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 //@Repository
-public interface BookRepository extends MongoRepository<Book, ObjectId> {
+public interface BookRepository extends MongoRepository<Book, String> {
 
 
 
@@ -24,8 +24,13 @@ public interface BookRepository extends MongoRepository<Book, ObjectId> {
         Book findByIsbn(String id);
 
 
-        @Aggregation(pipeline = {"{'$vectorSearch': { 'queryVector': ?0, 'path': 'embeddings', 'numCandidates': 100, 'index': 'default', 'limit': 10}}" })
+        @Query("{ '_id' : ?0 }")
+        Book findByBookId(String id);
+
+        @Aggregation(pipeline = {"{'$vectorSearch': { 'queryVector': ?0, 'path': 'embeddings', 'numCandidates': 100, 'index': 'vector_index', 'limit': 10}}" })
         List<Book> findSimilarBooks(float[] embeddings);
+
+
 
 
     }

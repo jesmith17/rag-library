@@ -5,6 +5,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.sql.Timestamp;
+
 @Document("reviews")
 public class Review {
 
@@ -12,8 +14,10 @@ public class Review {
     @Id
     private ObjectId id;
     private String bookId;
-    private String title;
-    private String review;
+    private String name;
+    private String text;
+    private Timestamp timestamp;
+
 
     public ObjectId getId() {
         return id;
@@ -31,19 +35,27 @@ public class Review {
         this.bookId = bookId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getReview() {
-        return review;
+    public String getText() {
+        return text;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }
